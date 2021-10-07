@@ -1,8 +1,8 @@
 import { render, screen } from "@testing-library/react";
 import App from "../App";
 
-test("Renders the heading", () => {
+test("Renders the logo", () => {
 	render(<App />);
-	const headingElement = screen.getByText(/epigram/i);
-	expect(headingElement).toBeInTheDocument();
+	const logo = screen.getByAltText("epigram logo");
+	expect(logo).toBeInTheDocument();
 });
