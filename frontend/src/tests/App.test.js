@@ -14,19 +14,24 @@ describe("Renders the logo", () => {
 });
 
 describe("Renders the Sidebar Links", () => {
-	render(<App />);
-
-	// const add = screen.getByRole("button", { name: /add/i });
-	// const help = screen.getByRole("button", { name: /help/i });
-
 	test("Button linking to the home page", async () => {
-		const home = await screen.findByRole("button", { name: /home/i });
+		render(<App />);
+		const home = await screen.findByRole("button", { name: /Home/i });
 		expect(home).toBeInTheDocument();
 	});
-	// test("Button linking to the add quote functionality", () => {
-	// 	expect(add).toBeInTheDocument();
-	// });
-	// test("Button linking to the help page", () => {
-	// 	expect(help).toBeInTheDocument();
-	// });
+	test("Button for a random quote", async () => {
+		render(<App />);
+		const random = await screen.findByRole("button", { name: /Random/i });
+		expect(random).toBeInTheDocument();
+	});
+	test("Button linking to the add quote functionality", async () => {
+		render(<App />);
+		const add = await screen.findByRole("button", { name: /Add/i });
+		expect(add).toBeInTheDocument();
+	});
+	test("Button linking to the help page", async () => {
+		render(<App />);
+		const help = await screen.findByRole("button", { name: /Help/i });
+		expect(help).toBeInTheDocument();
+	});
 });

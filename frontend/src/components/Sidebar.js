@@ -1,12 +1,7 @@
-import { Button, ButtonGroup } from "@chakra-ui/button";
-import { Flex, VStack } from "@chakra-ui/layout";
-import {
-	AiOutlineHome,
-	AiOutlinePlusSquare,
-	AiOutlineQuestionCircle,
-} from "react-icons/ai";
+import { Divider, Flex } from "@chakra-ui/layout";
 import React from "react";
 import Logo from "./Logo";
+import Navbar from "./Navbar";
 
 const Sidebar = () => {
 	return (
@@ -17,34 +12,11 @@ const Sidebar = () => {
 			w="30vw"
 			boxShadow="0 4px 12px 0 rgba(0,0,0,0.1)"
 			flexDirection="column"
+			alignItems="center"
 		>
 			<Logo />
-			<VStack>
-				<Button
-					leftIcon={<AiOutlineHome />}
-					size="md"
-					iconSpacing="2"
-					variant="ghost"
-				>
-					Home
-				</Button>
-				<Button
-					leftIcon={<AiOutlinePlusSquare />}
-					size="md"
-					iconSpacing="2"
-					variant="ghost"
-				>
-					Add
-				</Button>
-				<Button
-					leftIcon={<AiOutlineQuestionCircle />}
-					size="md"
-					iconSpacing="2"
-					variant="ghost"
-				>
-					Help
-				</Button>
-			</VStack>
+			<Divider marginTop="10" />
+			<Navbar />
 		</Flex>
 	);
 };
