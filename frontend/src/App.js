@@ -1,10 +1,11 @@
-import Logo from "./components/Logo";
+import { Flex } from "@chakra-ui/layout";
+import Sidebar from "../src/components/Sidebar";
 
 function App() {
 	return (
-		<div className="App">
-			<Logo />
-		</div>
+		<Flex>
+			<Sidebar />
+		</Flex>
 	);
 }
 
