@@ -4,7 +4,7 @@ import logoSVG from "../assets/Logo.svg";
 import React from "react";
 
 const Logo = () => {
-	return <Img src={logoSVG} alt="epigram logo" mt="10" />;
+	return <Img src={logoSVG} alt="epigram logo" mt="5" />;
 };
 
 export default Logo;

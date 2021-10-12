@@ -2,7 +2,7 @@ import React from "react";
 import { Flex } from "@chakra-ui/layout";
 import Link from "./Link";
 
-const Navbar = () => {
+const Navbar = ({ setReload }) => {
 	return (
 		<Flex
 			flexDirection="column"
@@ -10,8 +10,8 @@ const Navbar = () => {
 			as="nav"
 			paddingBottom="10"
 		>
-			<Link text="Random" />
-			<Link text="Add Quote" />
+			<Link text="Random Quote" click={setReload} />
+			<Link text="Add A Quote" />
 			<Link text="Help" />
 		</Flex>
 	);

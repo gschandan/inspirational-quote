@@ -1,7 +1,14 @@
 import React from "react";
 import { Button } from "@chakra-ui/button";
 
-const Link = ({ text }) => {
+const Link = ({ text, click }) => {
+	const handleClick = (e) => {
+		e.preventDefault();
+		if (text === "Random Quote") {
+			click(true);
+		}
+	};
+
 	return (
 		<Button
 			size="lg"
@@ -12,6 +19,7 @@ const Link = ({ text }) => {
 			width="100%"
 			fontSize="lg"
 			aria-label={`link to ${text}`}
+			onClick={(e) => handleClick(e)}
 		>
 			{text}
 		</Button>

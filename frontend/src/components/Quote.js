@@ -2,29 +2,31 @@ import React, { useState, useEffect } from "react";
 import { Heading, Container } from "@chakra-ui/layout";
 import { API_URL } from "../config";
 
-const Quote = () => {
+const Quote = ({ reload, setReload }) => {
 	const [quoteText, setQuoteText] = useState(
 		"I may not have gone where I intended to go, but I think I have ended up where I needed to be"
 	);
 	const [author, setAuthor] = useState("Douglas Adams");
 
 	useEffect(() => {
-		fetch(API_URL + "random")
-			.then((response) => response.json())
-			.then((data) => {
-				setQuoteText(data.quote);
-				setAuthor(data.author);
-			});
-	}, []);
+		const getQuote = async () => {
+			const result = await fetch(API_URL + "random");
+			const data = await result.json();
+			setQuoteText(data.quote);
+			setAuthor(data.author);
+		};
+		getQuote();
+		setReload(false);
+	}, [setReload, reload]);
 
 	return (
-		<Container width="20vw">
+		<>
 			<Heading
 				zIndex="10"
 				position="absolute"
-				left="10%"
-				right="30%"
-				top="30%"
+				left="20%"
+				right="40%"
+				top="40%"
 				fontSize="4xl"
 			>
 				{quoteText}
@@ -32,13 +34,14 @@ const Quote = () => {
 			<Heading
 				zIndex="10"
 				position="absolute"
-				right="40%"
-				bottom="40%"
+				left="40%"
+				right="10%"
+				top="60%"
 				fontSize="2xl"
 			>
 				{author}
 			</Heading>
-		</Container>
+		</>
 	);
 };
 
