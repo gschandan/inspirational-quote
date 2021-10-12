@@ -16,7 +16,7 @@ import (
 //Quote Structure
 type Quote struct {
 	ID		string	`json:"id"`
-	Text	string `json:"text"`
+	Quote	string `json:"quote"`
 	Author	string	`json:"author"`
 }
 
@@ -37,7 +37,7 @@ func getQuoteByID(res http.ResponseWriter, req *http.Request){
 	} else{
 		row:=database.QueryRow("SELECT * FROM quotes WHERE id = (?)", id)
 		var quote Quote
-		err:= row.Scan(&quote.ID, &quote.Text, &quote.Author)
+		err:= row.Scan(&quote.ID, &quote.Quote, &quote.Author)
 		checkErrors(err)
 		json.NewEncoder(res).Encode(quote)
 	}
@@ -52,7 +52,7 @@ func getRandomQuote(res http.ResponseWriter, req *http.Request){
 	id := rand.Intn(dbCount - 1) + 1
 	row:=database.QueryRow("SELECT * FROM quotes WHERE id = (?)", id)
 		var quote Quote
-		err:= row.Scan(&quote.ID, &quote.Text, &quote.Author)
+		err:= row.Scan(&quote.ID, &quote.Quote, &quote.Author)
 		checkErrors(err)
 		json.NewEncoder(res).Encode(quote)
 }
@@ -60,9 +60,20 @@ func getRandomQuote(res http.ResponseWriter, req *http.Request){
 //Add a Quote
 func addQuote(res http.ResponseWriter, req *http.Request){
 	res.Header().Set("Content-Type","application/json")
+	params := mux.Vars(req)
+	fmt.Print(params)
 	var quote Quote
-	_ = json.NewDecoder(req.Body).Decode(&quote)
-	fmt.Println(quote)
+	json.NewDecoder(req.Body).Decode(&quote)
+
+	statement,err := database.Prepare("INSERT INTO quotes (quote, author) VALUES (?, ?)")
+	checkErrors(err)
+	result, err := statement.Exec(quote.Quote, quote.Author)
+	checkErrors(err)
+	lastID, err := result.LastInsertId()
+	fmt.Println(lastID)
+	val := int(lastID)
+	quote.ID = strconv.Itoa(val)
+	json.NewEncoder(res).Encode(quote)
 	getRows()
 }
 
