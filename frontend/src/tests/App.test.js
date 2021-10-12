@@ -1,6 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import logoPNG from "../assets/Logo.svg";
 import Lightbulb from "../assets/8.svg";
+import QuoteImage from "../assets/notebook_quill.png";
 import App from "../App";
 
 //Sidebar
@@ -39,5 +40,13 @@ describe("Renders the lightbulb", () => {
 	const lightbulb = screen.getAllByAltText("inspirational-lightbulb");
 	test("The correct image is selected", () => {
 		expect(lightbulb[0]).toHaveAttribute("src", Lightbulb);
+	});
+});
+
+describe("Renders the notebook", () => {
+	render(<App />);
+	const notebook = screen.getAllByRole("img", { name: "notebook" });
+	test("The correct image is selected", () => {
+		expect(notebook[0]).toHaveAttribute("src", QuoteImage);
 	});
 });

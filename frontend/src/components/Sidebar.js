@@ -8,6 +8,7 @@ import Lightbulb from "../assets/8.svg";
 const Sidebar = () => {
 	return (
 		<Flex
+			gridRow="1/3"
 			pos="sticky"
 			left="5"
 			h="100vh"
