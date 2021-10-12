@@ -7,8 +7,8 @@ const Navbar = () => {
 		<Flex
 			flexDirection="column"
 			alignContent="center"
-			marginTop="10vh"
 			as="nav"
+			paddingBottom="10"
 		>
 			<Link text="Random" />
 			<Link text="Add Quote" />

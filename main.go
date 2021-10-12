@@ -27,6 +27,9 @@ var dbCount int
 func getQuoteByID(res http.ResponseWriter, req *http.Request){
 
 	res.Header().Set("Content-Type","application/json")
+	res.Header().Set("Access-Control-Allow-Origin", "*")
+    res.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+	
 	params := mux.Vars(req)
 	id,idErr := strconv.Atoi(params["id"])
 
@@ -48,6 +51,8 @@ func getQuoteByID(res http.ResponseWriter, req *http.Request){
 //Get Random Quote
 func getRandomQuote(res http.ResponseWriter, req *http.Request){
 	res.Header().Set("Content-Type","application/json")
+	res.Header().Set("Access-Control-Allow-Origin", "*")
+    res.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 	getRows()
 	id := rand.Intn(dbCount - 1) + 1
 	row:=database.QueryRow("SELECT * FROM quotes WHERE id = (?)", id)
@@ -60,6 +65,9 @@ func getRandomQuote(res http.ResponseWriter, req *http.Request){
 //Add a Quote
 func addQuote(res http.ResponseWriter, req *http.Request){
 	res.Header().Set("Content-Type","application/json")
+	res.Header().Set("Access-Control-Allow-Origin", "*")
+    res.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+
 	params := mux.Vars(req)
 	fmt.Print(params)
 	var quote Quote
@@ -124,9 +132,9 @@ func main(){
 	router := mux.NewRouter()
 
 	//Routes
-	router.HandleFunc("/api/quote/{id}", getQuoteByID).Methods("GET")
-	router.HandleFunc("/api/random", getRandomQuote).Methods("GET")
-	router.HandleFunc("/api/add", addQuote).Methods("POST")
+	router.HandleFunc("/api/quote/{id}", getQuoteByID).Methods("GET", "OPTIONS")
+	router.HandleFunc("/api/random", getRandomQuote).Methods("GET", "OPTIONS")
+	router.HandleFunc("/api/add", addQuote).Methods("POST", "OPTIONS")
 	http.Handle("/", router)
 
 	log.Print(" Server running on port 4001")

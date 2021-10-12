@@ -6,18 +6,12 @@ import Quote from "./Quote";
 
 const QuoteImage = () => {
 	return (
-		<Box
-			gridRow="1"
-			gridColumn="2"
-			justifySelf="center"
-			alignSelf="center"
-			mt="10"
-		>
+		<Box position="relative">
 			<Img
 				src={QuoteImageContainer}
 				alt="notebook"
-				maxWidth="80vw"
-				height="70vh"
+				boxSize="95vh"
+				objectFit="contain"
 			/>
 			<Quote />
 		</Box>

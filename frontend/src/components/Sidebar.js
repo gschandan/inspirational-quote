@@ -1,5 +1,5 @@
 import { Img } from "@chakra-ui/image";
-import { Divider, Flex } from "@chakra-ui/layout";
+import { Divider, Grid } from "@chakra-ui/layout";
 import React from "react";
 import Logo from "./Logo";
 import Navbar from "./Navbar";
@@ -7,27 +7,26 @@ import Lightbulb from "../assets/8.svg";
 
 const Sidebar = () => {
 	return (
-		<Flex
+		<Grid
 			gridRow="1/3"
 			pos="sticky"
 			left="5"
 			h="100vh"
 			w="20vw"
+			maxWidth="200px"
 			boxShadow="0 4px 12px 0 rgba(0,0,0,0.1)"
-			flexDirection="column"
 			alignItems="center"
 		>
 			<Logo />
-			<Divider marginTop="10" />
+			<Divider marginTop="2" />
 			<Navbar />
-			<Img
+			{/* <Img
 				src={Lightbulb}
 				alt="inspirational-lightbulb"
-				pos="absolute"
-				bottom="5"
 				width="15vw"
-			/>
-		</Flex>
+				justifySelf="center"
+			/> */}
+		</Grid>
 	);
 };
 
