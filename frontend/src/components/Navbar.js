@@ -5,13 +5,11 @@ import Link from "./Link";
 const Navbar = () => {
 	return (
 		<Flex
-			width="30%"
 			flexDirection="column"
 			alignContent="center"
-			marginTop="10"
+			marginTop="10vh"
 			as="nav"
 		>
-			<Link text="Home" />
 			<Link text="Random" />
 			<Link text="Add Quote" />
 			<Link text="Help" />

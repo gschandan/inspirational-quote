@@ -10,6 +10,7 @@ const Link = ({ text }) => {
 			letterSpacing="widest"
 			fontWeight="200"
 			width="100%"
+			fontSize="lg"
 			aria-label={`link to ${text}`}
 		>
 			{text}
