@@ -10,10 +10,13 @@ const Quote = () => {
 
 	useEffect(() => {
 		fetch(API_URL + "random")
-			.then((response) => response.json())
+			.then((response) => {
+				console.log(response);
+				response.json();
+			})
 			.then((data) => {
-				setQuoteText(data.quote);
-				setAuthor(data.author);
+				// setQuoteText(data.quote);
+				// setAuthor(data.author);
 			});
 	}, []);
 

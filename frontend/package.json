@@ -18,6 +18,12 @@
 		"react-scripts": "4.0.3",
 		"web-vitals": "^1.0.1"
 	},
+	"jest": {
+		"automock": false,
+		"setupFiles": [
+			"../src/setupTests.js"
+		]
+	},
 	"scripts": {
 		"start": "react-scripts start",
 		"build": "react-scripts build",
@@ -41,5 +47,8 @@
 			"last 1 firefox version",
 			"last 1 safari version"
 		]
+	},
+	"devDependencies": {
+		"jest-fetch-mock": "^3.0.3"
 	}
 }

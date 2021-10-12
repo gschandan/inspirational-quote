@@ -1,8 +1,8 @@
 import { render, screen } from "@testing-library/react";
-import logoPNG from "../assets/Logo.svg";
-import Lightbulb from "../assets/8.svg";
-import QuoteImage from "../assets/notebook_quill.png";
-import App from "../App";
+import logoSVG from "./assets/Logo.svg";
+import Lightbulb from "./assets/8.svg";
+import QuoteImage from "./assets/notebook_quill.png";
+import App from "./App";
 
 //Sidebar
 
@@ -13,7 +13,7 @@ describe("Renders the logo", () => {
 		expect(logo).toBeInTheDocument();
 	});
 	test("The correct logo image is selected", () => {
-		expect(logo).toHaveAttribute("src", logoPNG);
+		expect(logo).toHaveAttribute("src", logoSVG);
 	});
 });
 
@@ -35,13 +35,13 @@ describe("Renders the Sidebar Links", () => {
 	});
 });
 
-describe("Renders the lightbulb", () => {
-	render(<App />);
-	const lightbulb = screen.getAllByAltText("inspirational-lightbulb");
-	test("The correct image is selected", () => {
-		expect(lightbulb[0]).toHaveAttribute("src", Lightbulb);
-	});
-});
+// describe("Renders the lightbulb", () => {
+// 	render(<App />);
+// 	const lightbulb = screen.getAllByAltText("inspirational-lightbulb");
+// 	test("The correct image is selected", () => {
+// 		expect(lightbulb[0]).toHaveAttribute("src", Lightbulb);
+// 	});
+// });
 
 describe("Renders the notebook", () => {
 	render(<App />);
