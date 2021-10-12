@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"math/rand"
 	"net/http"
 	"strconv"
 
@@ -36,7 +37,8 @@ func getQuoteByID(res http.ResponseWriter, req *http.Request){
 	} else{
 		row:=database.QueryRow("SELECT * FROM quotes WHERE id = (?)", id)
 		var quote Quote
-		row.Scan(&quote.ID, &quote.Text, &quote.Author)
+		err:= row.Scan(&quote.ID, &quote.Text, &quote.Author)
+		checkErrors(err)
 		json.NewEncoder(res).Encode(quote)
 	}
 	return
@@ -46,12 +48,33 @@ func getQuoteByID(res http.ResponseWriter, req *http.Request){
 //Get Random Quote
 func getRandomQuote(res http.ResponseWriter, req *http.Request){
 	res.Header().Set("Content-Type","application/json")
-
+	getRows()
+	id := rand.Intn(dbCount - 1) + 1
+	row:=database.QueryRow("SELECT * FROM quotes WHERE id = (?)", id)
+		var quote Quote
+		err:= row.Scan(&quote.ID, &quote.Text, &quote.Author)
+		checkErrors(err)
+		json.NewEncoder(res).Encode(quote)
 }
 
 //Add a Quote
 func addQuote(res http.ResponseWriter, req *http.Request){
-	
+	res.Header().Set("Content-Type","application/json")
+	var quote Quote
+	_ = json.NewDecoder(req.Body).Decode(&quote)
+	fmt.Println(quote)
+	getRows()
+}
+
+func getRows(){
+	//Small helper function to update number of quotes
+	rows,err := database.Query("SELECT COUNT(*) FROM quotes")
+	checkErrors(err)
+	for rows.Next() {   
+		if err := rows.Scan(&dbCount); err != nil {
+			checkErrors(err)
+		}
+	}
 }
 
 func checkErrors(err error){
@@ -71,13 +94,7 @@ func main(){
 	statement,err := database.Prepare("CREATE TABLE IF NOT EXISTS quotes (id INTEGER PRIMARY KEY, quote TEXT, author TEXT)")
 	checkErrors(err)
 	statement.Exec()
-	rows,err := database.Query("SELECT COUNT(*) FROM quotes")
-	checkErrors(err)
-	for rows.Next() {   
-		if err := rows.Scan(&dbCount); err != nil {
-			log.Fatal(err)
-		}
-	}
+	getRows()
 
 	if dbCount <= 1 {
 		statement,err = database.Prepare("INSERT INTO quotes (quote, author) VALUES (?, ?)")
