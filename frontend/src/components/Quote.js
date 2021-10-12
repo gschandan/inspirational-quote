@@ -26,7 +26,7 @@ const Quote = ({ reload, setReload }) => {
 				position="absolute"
 				left="20%"
 				right="40%"
-				top="40%"
+				top="30%"
 				fontSize="4xl"
 			>
 				{quoteText}
@@ -36,7 +36,7 @@ const Quote = ({ reload, setReload }) => {
 				position="absolute"
 				left="40%"
 				right="10%"
-				top="60%"
+				top="55%"
 				fontSize="2xl"
 			>
 				{author}

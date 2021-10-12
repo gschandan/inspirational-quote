@@ -1,17 +1,18 @@
 import { Img } from "@chakra-ui/image";
-import { Grid } from "@chakra-ui/layout";
+import { Container, Grid } from "@chakra-ui/layout";
 import React from "react";
 import QuoteImageContainer from "../assets/notebook.png";
 import Quill from "../assets/quill.png";
+import AddQuote from "./AddQuote";
 import Quote from "./Quote";
 
-const QuoteImage = ({ reload, setReload }) => {
+const QuoteContainer = ({ reload, setReload }) => {
 	return (
 		<Grid position="relative" gridTemplateColumns="3fr 1fr">
 			<Img
 				src={QuoteImageContainer}
 				alt="notebook"
-				boxSize="95vh"
+				boxSize="80vh"
 				objectFit="contain"
 				gridRow="1/3"
 				gridColumn="1"
@@ -22,13 +23,16 @@ const QuoteImage = ({ reload, setReload }) => {
 			<Img
 				src={Quill}
 				alt="quill"
-				boxSize="95vh"
+				boxSize="80vh"
 				objectFit="contain"
 				gridRow="1/3"
 				gridColumn="2"
 			/>
+			<Container gridRow="3" gridColumn="1/3" mt="-10">
+				<AddQuote />
+			</Container>
 		</Grid>
 	);
 };
 
-export default QuoteImage;
+export default QuoteContainer;
