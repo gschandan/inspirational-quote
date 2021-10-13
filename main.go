@@ -26,10 +26,13 @@ var dbCount int
 //Get Quote By ID - Currently only used for testing
 func getQuoteByID(res http.ResponseWriter, req *http.Request){
 
-	res.Header().Set("Content-Type","application/json")
-	res.Header().Set("Access-Control-Allow-Origin", "*")
-    res.Header().Set("Access-Control-Allow-Headers", "Content-Type")
-	
+	// res.Header().Set("Content-Type","application/json")
+	// res.Header().Set("Access-Control-Allow-Origin", "*")
+    // res.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+		responseConfig(&res, req)
+	if (*req).Method == "OPTIONS" {
+		return
+	}
 	params := mux.Vars(req)
 	id,idErr := strconv.Atoi(params["id"])
 
@@ -50,9 +53,13 @@ func getQuoteByID(res http.ResponseWriter, req *http.Request){
 
 //Get Random Quote
 func getRandomQuote(res http.ResponseWriter, req *http.Request){
-	res.Header().Set("Content-Type","application/json")
-	res.Header().Set("Access-Control-Allow-Origin", "*")
-    res.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+	// res.Header().Set("Content-Type","application/json")
+	// res.Header().Set("Access-Control-Allow-Origin", "*")
+    // res.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+	responseConfig(&res, req)
+	if (*req).Method == "OPTIONS" {
+		return
+	}
 	getRows()
 	id := rand.Intn(dbCount - 1) + 1
 	row:=database.QueryRow("SELECT * FROM quotes WHERE id = (?)", id)
@@ -64,9 +71,13 @@ func getRandomQuote(res http.ResponseWriter, req *http.Request){
 
 //Add a Quote
 func addQuote(res http.ResponseWriter, req *http.Request){
-	res.Header().Set("Content-Type","application/json")
-	res.Header().Set("Access-Control-Allow-Origin", "*")
-    res.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+	responseConfig(&res, req)
+	if (*req).Method == "OPTIONS" {
+		return
+	}
+	// res.Header().Set("Content-Type","application/json")
+	// res.Header().Set("Access-Control-Allow-Origin", "*")
+    // res.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 
 	params := mux.Vars(req)
 	fmt.Print(params)
@@ -100,6 +111,12 @@ func checkErrors(err error){
 	if err != nil {
 		fmt.Println(err)
 	}
+}
+
+func responseConfig(res *http.ResponseWriter, req *http.Request) {
+	(*res).Header().Set("Access-Control-Allow-Origin", "*")
+    (*res).Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS")
+    (*res).Header().Set("Access-Control-Allow-Headers", "Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization")
 }
 
 func main(){
