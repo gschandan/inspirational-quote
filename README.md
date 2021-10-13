@@ -3,7 +3,7 @@
 
 An inspirational quote displaying application, with the ability to fetch a random quote, and add a quote to the local database.
 
-I challenged myself with this project by trying to learn (having never developed in go before) and implement the API routes in go, whilst also utilising a local SQL databse to store the quotes. I chose this option, rather than using a cloud based or managed db provider to further my own learning. When running the server for the first time, if the quotes database doesn't exist, then it will be created and several quotes stored in there.
+I challenged myself with this project by trying to learn (having never developed in Go before) and implement the API routes in Go, whilst also utilising a local SQL databse to store the quotes. I chose this option, rather than using a cloud based or managed db provider to further my own learning. When running the server for the first time, if the quotes database doesn't exist, then it will be created and several quotes stored in there.
 The application is primarily desktop oriented.
 
 
@@ -79,10 +79,9 @@ Send the request with `Content-Type` = `application/json` header.
 ## Roadmap
 
 - Generate tag cloud based on word frequencies
-
 - Retrieve quotes by tags (most relevant)
-
 - Add delete and update routes
+- If deploying, tighten CORS settings and add authentication to the database, and potentially the add quotes interface
 
 
 
