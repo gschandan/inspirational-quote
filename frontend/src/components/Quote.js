@@ -1,8 +1,11 @@
-import React, { useState, useEffect } from "react";
-import { Heading, Container } from "@chakra-ui/layout";
+import React, { useState, useEffect, useContext } from "react";
+import { Heading, Box } from "@chakra-ui/layout";
 import { API_URL } from "../config";
+import { QuoteContext } from "./Context";
 
-const Quote = ({ reload, setReload }) => {
+const Quote = () => {
+	const { reload, setReload } = useContext(QuoteContext);
+
 	const [quoteText, setQuoteText] = useState(
 		"I may not have gone where I intended to go, but I think I have ended up where I needed to be"
 	);
@@ -20,27 +23,35 @@ const Quote = ({ reload, setReload }) => {
 	}, [setReload, reload]);
 
 	return (
-		<Container position="absolute" top="30%" right="45%" width="60vh">
+		<Box
+			// position="absolute"
+			// top="20%"
+			// left="15%"
+			gridRow="1/2"
+			gridColumn="1"
+			// alignSelf="flex-end"
+			// justifySelf="flex-end"
+		>
 			<Heading
 				zIndex="10"
 				position="relative"
-				left="30%"
-				right="40%"
-				top="30%"
-				fontSize="4xl"
+				left="calc(2vh + 2vw)"
+				top="30vh"
+				fontSize="calc(1vh + 2vw)"
+				width="calc(50vh - 5vw)"
 			>
 				{quoteText}
 			</Heading>
 			<Heading
 				zIndex="10"
-				position="relative"
-				left="80%"
-				top="70%"
-				fontSize="2xl"
+				position="absolute"
+				left="35vw"
+				top="50vh"
+				fontSize="calc(1vh + 1vw)"
 			>
 				{author}
 			</Heading>
-		</Container>
+		</Box>
 	);
 };
 

@@ -1,14 +1,21 @@
 import { Img } from "@chakra-ui/image";
 import { Container, Grid } from "@chakra-ui/layout";
-import React from "react";
+import React, { useContext } from "react";
 import QuoteImageContainer from "../assets/notebook.png";
 import Quill from "../assets/quill.png";
 import AddQuote from "./AddQuote";
 import Quote from "./Quote";
+import { QuoteContext } from "./Context";
 
-const QuoteContainer = ({ reload, setReload, add, setAdd }) => {
+const QuoteContainer = () => {
+	const { addHidden } = useContext(QuoteContext);
+
 	return (
-		<Grid position="relative" gridTemplateColumns="3fr 1fr">
+		<Grid
+			position="relative"
+			gridTemplateColumns="3fr 1fr"
+			placeItems="center"
+		>
 			<Img
 				src={QuoteImageContainer}
 				alt="notebook"
@@ -16,10 +23,10 @@ const QuoteContainer = ({ reload, setReload, add, setAdd }) => {
 				objectFit="contain"
 				gridRow="1/3"
 				gridColumn="1"
-				alignSelf="flex-end"
-				justifySelf="flex-end"
+				alignSelf="center"
+				justifySelf="center"
 			/>
-			<Quote reload={reload} setReload={setReload} />
+			<Quote />
 			<Img
 				src={Quill}
 				alt="quill"
@@ -31,7 +38,7 @@ const QuoteContainer = ({ reload, setReload, add, setAdd }) => {
 			<Container
 				gridRow="3"
 				gridColumn="1/3"
-				display={add ? "flex" : "none"}
+				display={addHidden ? "flex" : "none"}
 			>
 				<AddQuote />
 			</Container>

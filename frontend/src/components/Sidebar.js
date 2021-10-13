@@ -3,7 +3,7 @@ import React from "react";
 import Logo from "./Logo";
 import Navbar from "./Navbar";
 
-const Sidebar = ({ setReload }) => {
+const Sidebar = () => {
 	return (
 		<Grid
 			gridRow="1/3"
@@ -16,7 +16,7 @@ const Sidebar = ({ setReload }) => {
 		>
 			<Logo />
 			<Divider marginTop="2" />
-			<Navbar setReload={setReload} />
+			<Navbar />
 		</Grid>
 	);
 };
