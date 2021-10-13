@@ -5,14 +5,17 @@ import {
 	Button,
 	useToast,
 	Flex,
-	Textarea,
 } from "@chakra-ui/react";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { API_URL } from "../config";
+import { QuoteContext } from "./Context";
 
 const AddQuote = () => {
-	const [author, setAuthor] = useState("");
-	const [quote, setQuote] = useState("");
+	const { reload, setReload, setAuthor, setQuoteText } =
+		useContext(QuoteContext);
+
+	const [formAuthor, setFormAuthor] = useState("");
+	const [formQuote, setFormQuote] = useState("");
 
 	const toast = useToast();
 
@@ -25,11 +28,13 @@ const AddQuote = () => {
 				"Content-Type": "application/json",
 			},
 			method: "POST",
-			body: JSON.stringify({ quote, author }),
+			body: JSON.stringify({ quote: formQuote, author: formAuthor }),
 		});
 		const data = await response.json();
 		console.log(data);
-
+		setQuoteText(await data.quoteText);
+		setAuthor(await data.author);
+		setReload(!reload);
 		toast({
 			title: "Successfully submitted the quote",
 			status: "success",
@@ -39,14 +44,15 @@ const AddQuote = () => {
 	};
 
 	return (
-		<Flex direction="column" alignItems="center">
-			<Flex direction="row">
+		<Flex direction="column" alignItems="center" ml="3">
+			<Flex direction="row" justifyContent="flex-start">
 				<FormControl isRequired>
 					<FormLabel>Quote</FormLabel>
-					<Textarea
+					<Input
 						type="text"
 						placeholder="I had a dream..."
-						onChange={(e) => setQuote(e.target.value)}
+						width="45vw"
+						onChange={(e) => setFormQuote(e.target.value)}
 					/>
 				</FormControl>
 				<FormControl marginLeft="5" isRequired>
@@ -54,12 +60,13 @@ const AddQuote = () => {
 					<Input
 						type="text"
 						placeholder="M.L. King"
-						onChange={(e) => setAuthor(e.target.value)}
+						width="10vw"
+						onChange={(e) => setFormAuthor(e.target.value)}
 					/>
 				</FormControl>
 			</Flex>
 			<Button
-				isDisabled={author && quote ? false : true}
+				isDisabled={formAuthor && formQuote ? false : true}
 				width="max-content"
 				padding="5 5"
 				mt="4"

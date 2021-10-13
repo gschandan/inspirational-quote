@@ -1,26 +1,24 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useEffect, useContext } from "react";
 import { Heading, Box } from "@chakra-ui/layout";
 import { API_URL } from "../config";
 import { QuoteContext } from "./Context";
 
 const Quote = () => {
-	const { reload, setReload } = useContext(QuoteContext);
-
-	const [quoteText, setQuoteText] = useState(
-		"I may not have gone where I intended to go, but I think I have ended up where I needed to be"
-	);
-	const [author, setAuthor] = useState("Douglas Adams");
+	const { reload, setReload, author, setAuthor, quoteText, setQuoteText } =
+		useContext(QuoteContext);
 
 	useEffect(() => {
-		const getQuote = async () => {
-			const result = await fetch(API_URL + "random");
-			const data = await result.json();
-			setQuoteText(data.quote);
-			setAuthor(data.author);
-		};
-		getQuote();
-		setReload(false);
-	}, [setReload, reload]);
+		if (reload) {
+			const getQuote = async () => {
+				const result = await fetch(API_URL + "random");
+				const data = await result.json();
+				setQuoteText(data.quote);
+				setAuthor(data.author);
+			};
+			getQuote();
+			setReload(false);
+		}
+	}, [setReload, reload, setAuthor, setQuoteText]);
 
 	return (
 		<Box

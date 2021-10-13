@@ -70,6 +70,7 @@ func addQuote(res http.ResponseWriter, req *http.Request){
 		return
 	}
 
+
 	params := mux.Vars(req)
 	fmt.Print(params)
 	var quote Quote
@@ -105,6 +106,7 @@ func checkErrors(err error){
 }
 
 func responseConfig(res *http.ResponseWriter, req *http.Request) {
+	(*res).Header().Set("Content-Type","application/json")
 	(*res).Header().Set("Access-Control-Allow-Origin", "*")
     (*res).Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS")
     (*res).Header().Set("Access-Control-Allow-Headers", "Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization")

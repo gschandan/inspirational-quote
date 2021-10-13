@@ -35,11 +35,7 @@ const QuoteContainer = () => {
 				gridRow="1/3"
 				gridColumn="2"
 			/>
-			<Container
-				gridRow="3"
-				gridColumn="1/3"
-				display={addHidden ? "flex" : "none"}
-			>
+			<Container gridRow="3" display={addHidden ? "flex" : "none"}>
 				<AddQuote />
 			</Container>
 		</Grid>
