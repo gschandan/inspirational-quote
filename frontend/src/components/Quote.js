@@ -20,11 +20,11 @@ const Quote = ({ reload, setReload }) => {
 	}, [setReload, reload]);
 
 	return (
-		<>
+		<Container position="absolute" top="30%" right="45%" width="60vh">
 			<Heading
 				zIndex="10"
-				position="absolute"
-				left="20%"
+				position="relative"
+				left="30%"
 				right="40%"
 				top="30%"
 				fontSize="4xl"
@@ -33,15 +33,14 @@ const Quote = ({ reload, setReload }) => {
 			</Heading>
 			<Heading
 				zIndex="10"
-				position="absolute"
-				left="40%"
-				right="10%"
-				top="55%"
+				position="relative"
+				left="80%"
+				top="70%"
 				fontSize="2xl"
 			>
 				{author}
 			</Heading>
-		</>
+		</Container>
 	);
 };
 

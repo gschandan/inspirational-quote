@@ -1,4 +1,3 @@
-import { Img } from "@chakra-ui/image";
 import { Divider, Grid } from "@chakra-ui/layout";
 import React from "react";
 import Logo from "./Logo";
@@ -13,7 +12,7 @@ const Sidebar = ({ setReload }) => {
 			h="100vh"
 			w="25vw"
 			boxShadow="0 4px 12px 0 rgba(0,0,0,0.1)"
-			alignItems="center"
+			justifyContent="center"
 		>
 			<Logo />
 			<Divider marginTop="2" />

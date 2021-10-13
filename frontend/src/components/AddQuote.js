@@ -1,8 +1,6 @@
 import {
 	FormControl,
 	FormLabel,
-	FormErrorMessage,
-	FormHelperText,
 	Input,
 	Button,
 	useToast,
@@ -48,7 +46,7 @@ const AddQuote = () => {
 					<Textarea
 						type="text"
 						placeholder="I had a dream..."
-						onBlur={(e) => setQuote(e.target.value)}
+						onChange={(e) => setQuote(e.target.value)}
 					/>
 				</FormControl>
 				<FormControl marginLeft="5" isRequired>
@@ -56,11 +54,12 @@ const AddQuote = () => {
 					<Input
 						type="text"
 						placeholder="M.L. King"
-						onBlur={(e) => setAuthor(e.target.value)}
+						onChange={(e) => setAuthor(e.target.value)}
 					/>
 				</FormControl>
 			</Flex>
 			<Button
+				isDisabled={author && quote ? false : true}
 				width="max-content"
 				padding="5 5"
 				mt="4"

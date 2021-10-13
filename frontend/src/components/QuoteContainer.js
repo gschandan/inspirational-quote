@@ -6,7 +6,7 @@ import Quill from "../assets/quill.png";
 import AddQuote from "./AddQuote";
 import Quote from "./Quote";
 
-const QuoteContainer = ({ reload, setReload }) => {
+const QuoteContainer = ({ reload, setReload, add, setAdd }) => {
 	return (
 		<Grid position="relative" gridTemplateColumns="3fr 1fr">
 			<Img
@@ -28,7 +28,11 @@ const QuoteContainer = ({ reload, setReload }) => {
 				gridRow="1/3"
 				gridColumn="2"
 			/>
-			<Container gridRow="3" gridColumn="1/3" mt="-10">
+			<Container
+				gridRow="3"
+				gridColumn="1/3"
+				display={add ? "flex" : "none"}
+			>
 				<AddQuote />
 			</Container>
 		</Grid>

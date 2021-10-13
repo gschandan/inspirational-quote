@@ -26,9 +26,6 @@ var dbCount int
 //Get Quote By ID - Currently only used for testing
 func getQuoteByID(res http.ResponseWriter, req *http.Request){
 
-	// res.Header().Set("Content-Type","application/json")
-	// res.Header().Set("Access-Control-Allow-Origin", "*")
-    // res.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 		responseConfig(&res, req)
 	if (*req).Method == "OPTIONS" {
 		return
@@ -53,15 +50,12 @@ func getQuoteByID(res http.ResponseWriter, req *http.Request){
 
 //Get Random Quote
 func getRandomQuote(res http.ResponseWriter, req *http.Request){
-	// res.Header().Set("Content-Type","application/json")
-	// res.Header().Set("Access-Control-Allow-Origin", "*")
-    // res.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 	responseConfig(&res, req)
 	if (*req).Method == "OPTIONS" {
 		return
 	}
 	getRows()
-	id := rand.Intn(dbCount - 1) + 1
+	id := rand.Intn(dbCount) + 1
 	row:=database.QueryRow("SELECT * FROM quotes WHERE id = (?)", id)
 		var quote Quote
 		err:= row.Scan(&quote.ID, &quote.Quote, &quote.Author)
@@ -75,9 +69,6 @@ func addQuote(res http.ResponseWriter, req *http.Request){
 	if (*req).Method == "OPTIONS" {
 		return
 	}
-	// res.Header().Set("Content-Type","application/json")
-	// res.Header().Set("Access-Control-Allow-Origin", "*")
-    // res.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 
 	params := mux.Vars(req)
 	fmt.Print(params)

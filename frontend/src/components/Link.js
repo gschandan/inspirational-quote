@@ -1,11 +1,14 @@
 import React from "react";
 import { Button } from "@chakra-ui/button";
 
-const Link = ({ text, click }) => {
+const Link = ({ text, click, state = null }) => {
 	const handleClick = (e) => {
 		e.preventDefault();
 		if (text === "Random Quote") {
-			click(true);
+			click(!state);
+		}
+		if (text === "Add A Quote") {
+			click(!state);
 		}
 	};
 
