@@ -44,8 +44,8 @@ const AddQuote = () => {
 	};
 
 	return (
-		<Flex direction="column" alignItems="center" ml="3">
-			<Flex direction="row" justifyContent="flex-start">
+		<Flex direction="column" alignItems="center">
+			<Flex direction="row">
 				<FormControl isRequired>
 					<FormLabel>Quote</FormLabel>
 					<Input

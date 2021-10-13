@@ -23,7 +23,7 @@ type Quote struct {
 var database *sql.DB
 var dbCount int
 
-//Get Quote By ID - Currently only used for testing
+//Get Quote By ID - Currently only used for testing/unit tests
 func getQuoteByID(res http.ResponseWriter, req *http.Request){
 
 		responseConfig(&res, req)
