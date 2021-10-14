@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.js": "/static/js/main.547b538c.chunk.js",
+    "main.js.map": "/static/js/main.547b538c.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.248907bc.js",
+    "runtime-main.js.map": "/static/js/runtime-main.248907bc.js.map",
+    "static/css/2.61ad4109.chunk.css": "/static/css/2.61ad4109.chunk.css",
+    "static/js/2.439263e4.chunk.js": "/static/js/2.439263e4.chunk.js",
+    "static/js/2.439263e4.chunk.js.map": "/static/js/2.439263e4.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/2.61ad4109.chunk.css.map": "/static/css/2.61ad4109.chunk.css.map",
+    "static/js/2.439263e4.chunk.js.LICENSE.txt": "/static/js/2.439263e4.chunk.js.LICENSE.txt",
+    "static/media/Logo.143d2172.svg": "/static/media/Logo.143d2172.svg",
+    "static/media/index.css": "/static/media/amatic-sc-vietnamese-400-normal.66173d93.woff2",
+    "static/media/notebook.9c183326.png": "/static/media/notebook.9c183326.png",
+    "static/media/quill.9434f84a.png": "/static/media/quill.9434f84a.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.248907bc.js",
+    "static/css/2.61ad4109.chunk.css",
+    "static/js/2.439263e4.chunk.js",
+    "static/js/main.547b538c.chunk.js"
+  ]
+}
