@@ -7,7 +7,10 @@ import (
 	"log"
 	"math/rand"
 	"net/http"
+	"os"
+	"path/filepath"
 	"strconv"
+	"time"
 
 	"github.com/gorilla/mux"
 	_ "github.com/mattn/go-sqlite3"
@@ -18,6 +21,11 @@ type Quote struct {
 	ID		string	`json:"id"`
 	Quote	string `json:"quote"`
 	Author	string	`json:"author"`
+}
+
+type spaHandler struct {
+	staticPath string
+	indexPath  string
 }
 
 var database *sql.DB
@@ -112,6 +120,30 @@ func responseConfig(res *http.ResponseWriter, req *http.Request) {
     (*res).Header().Set("Access-Control-Allow-Headers", "Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization")
 }
 
+func (h spaHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+    // From Mux documentation on serving react projects
+	path, err := filepath.Abs(r.URL.Path)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+
+	path = filepath.Join(h.staticPath, path)
+	_, err = os.Stat(path)
+
+	if os.IsNotExist(err) {
+		// file does not exist, serve index.html
+		http.ServeFile(w, r, filepath.Join(h.staticPath, h.indexPath))
+		return
+	} else if err != nil {
+        // If a different error occurs, return a 500 internal server error and stop
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+    // otherwise, use http.FileServer to serve the static dir
+	http.FileServer(http.Dir(h.staticPath)).ServeHTTP(w, r)
+}
+
 func main(){
 
 	//Initialise SQLite-3 DB
@@ -145,8 +177,17 @@ func main(){
 	router.HandleFunc("/api/quote/{id}", getQuoteByID).Methods("GET", "OPTIONS")
 	router.HandleFunc("/api/random", getRandomQuote).Methods("GET", "OPTIONS")
 	router.HandleFunc("/api/add", addQuote).Methods("POST", "OPTIONS")
-	http.Handle("/", router)
 
+	spa := spaHandler{staticPath: "./frontend/build", indexPath: "index.html"}
+	router.PathPrefix("/").Handler(spa)
+
+	srv := &http.Server{
+		Handler: router,
+		Addr:    "127.0.0.1:4001",
+		WriteTimeout: 15 * time.Second,
+		ReadTimeout:  15 * time.Second,
+	}
 	log.Print(" Server running on port 4001")
-	log.Fatal(http.ListenAndServe(":4001", router))
+	log.Fatal(srv.ListenAndServe())
+	
 }
