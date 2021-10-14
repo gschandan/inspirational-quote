@@ -183,7 +183,7 @@ func main(){
 
 	srv := &http.Server{
 		Handler: router,
-		Addr:    "https://gschandan.dev:4001",
+		Addr:    "127.0.0.1:4001",
 		WriteTimeout: 15 * time.Second,
 		ReadTimeout:  15 * time.Second,
 	}
